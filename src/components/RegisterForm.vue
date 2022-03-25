@@ -1,4 +1,11 @@
 <template>
+  <div
+    class="text-white text-center font-bold p-4 mb-4"
+    :class="reg_alert_variant"
+    v-show="reg_show_alert"
+  >
+    {{ reg_alert_msg }}
+  </div>
   <!-- Registration Form -->
   <Vee-form :validation-schema="schema" @submit="register">
     <!-- Name -->
@@ -31,6 +38,8 @@
     <div class="mb-3">
       <label class="inline-block mb-2">Age</label>
       <Vee-field
+        min="13"
+        max="100"
         type="number"
         name="age"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
@@ -71,6 +80,7 @@
         name="country"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
       >
+        <option value="none" disabled>-</option>
         <option value="USA">USA</option>
         <option value="Mexico">Mexico</option>
         <option value="Germany">Germany</option>
@@ -98,6 +108,8 @@
   </Vee-form>
 </template>
 <script>
+// import { auth, userCollection } from "@/includes/firebase";
+
 export default {
   name: "RegisterForm",
   data() {
@@ -111,9 +123,43 @@ export default {
       tos: "required",
     };
 
+    const initial_values = {
+      country: "none",
+    };
+
     return {
-        schema
-    }
+      schema,
+      initial_values,
+      reg_in_submission: false,
+      reg_show_alert: false,
+      reg_alert_msg: null,
+      reg_alert_variant: null,
+    };
+  },
+
+  methods: {
+    async register(values) {
+      console.log(values);
+      this.reg_in_submission = true;
+      this.reg_alert_variant = "bg-blue-500";
+      this.reg_alert_msg = "Please wait! Your account is being created.";
+
+      try {
+        await this.$store.dispatch("register", values);
+
+        this.reg_show_alert = true;
+        this.reg_alert_variant = "bg-green-500";
+        this.reg_alert_msg = "Success! Your account has been created.";
+      } catch (err) {
+        this.reg_in_submission = false;
+        this.reg_alert_variant = "bg-red-500";
+        this.reg_alert_msg = "An unexpected error occurred. Please try again later!";
+
+        return;
+      }
+
+      // this.$store.commit("toggleAuth");
+    },
   },
 };
 </script>

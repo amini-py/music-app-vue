@@ -1,8 +1,15 @@
 <template>
+  <div
+    class="text-white text-center font-bold p-4 mb-4"
+    v-if="login_show_alert"
+    :class="login_alert_variant"
+  >
+    {{ login_alert_msg }}
+  </div>
   <!-- Login Form -->
-  <Vee-form :validation-schema="schema">
+  <Vee-form :validation-schema="loginSchema" @submit="login">
     <!-- Email -->
-      <div class="mb-3">
+    <div class="mb-3">
       <label class="inline-block mb-2">Email</label>
       <Vee-field
         type="email"
@@ -25,6 +32,7 @@
     </div>
     <button
       type="submit"
+      :disabled="login_in_submission"
       class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
     >
       Submit
@@ -35,13 +43,41 @@
 export default {
   name: "LoginForm",
   data() {
-    const schema = {
+    const loginSchema = {
       email: "required|email",
       password: "required|min:8|max:100",
     };
     return {
-      schema,
+      loginSchema,
+      login_in_submission: false,
+      login_show_alert: false,
+      login_alert_variant: "bg-blue-500",
+      login_alert_msg: "Please wait! We are logging you in.",
     };
+  },
+
+  methods: {
+    async login(values) {
+      this.login_in_submission = true;
+      this.login_alert_variant = "bg-blue-500";
+      this.login_alert_msg = "Please wait! We are logging you in.";
+
+      try {
+        await this.$store.dispatch("login", values);
+
+        this.login_show_alert = true;
+        this.login_alert_variant = "bg-green-500";
+        this.login_alert_msg = "Success! You are now logged in.";
+      } catch (err) {
+        this.login_in_submission = false;
+        this.login_alert_variant = "bg-red-500";
+        this.login_alert_msg = "Invalid login details.";
+
+        return;
+      }
+
+      console.log(values);
+    },
   },
 };
 </script>
