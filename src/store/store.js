@@ -10,7 +10,7 @@ export default createStore({
     toggleAuthModal: state => {
       state.authModalShow = !state.authModalShow;
     },
-    toggleAuth(state) {
+    toggleAuth: state => {
       state.userLoggedIn = !state.userLoggedIn
     },
   },
@@ -21,40 +21,47 @@ export default createStore({
     async register({ commit }, values) {
 
       // Registering User
-      await auth.createUserWithEmailAndPassword(values.email, values.password)
-        .then(userCredential => {
-          // Writing Documents
-          userCollection.doc(userCredential.user.uid).set({
-            // User Info
-            email: values.email,
-            password: values.password,
-            age: values.age,
-            country: values.country,
-          });
+      const userCred = await auth.createUserWithEmailAndPassword(values.email, values.password)
+      // Writing Documents
+      await userCollection.doc(userCred.user.uid).set({
+        // User Info
+        email: values.email,
+        password: values.password,
+        age: values.age,
+        country: values.country,
+      });
 
-          commit('toggleAuth')
-        })
-        .catch(err => {
-          console.log("An unexpected error during registering your account!", err)
-        })
+      commit('toggleAuth');
 
     },
-
-
     async login({ commit }, values) {
-      auth.signInWithEmailAndPassword(
+      await auth.signInWithEmailAndPassword(
         values.email,
         values.password
       );
 
-      commit('toggleAuth')
-    }
-  },
-  init_login({ commit }) {
-    const user = auth.currentUser;
-
-    if (user) {
       commit('toggleAuth');
+    },
+    init_login({ commit }) {
+      const user = auth.currentUser;
+
+      if (user) {
+        commit('toggleAuth');
+      }
+    },
+    async signOut({ commit },) {
+      await auth.signOut();
+
+      commit('toggleAuth');
+    },
+    check() {
+      const userLoggedIn = auth.currentUser;
+
+      if (userLoggedIn) {
+        console.log("User is logged in.")
+      } else {
+        console.log("User is not logged in.")
+      }
     }
   },
 });

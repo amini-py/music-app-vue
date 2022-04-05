@@ -101,7 +101,7 @@
     </div>
     <button
       type="submit"
-      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:bg-purple-300"
     >
       Submit
     </button>
@@ -158,7 +158,7 @@ export default {
         return;
       }
 
-      // this.$store.commit("toggleAuth");
+      window.location.reload();
     },
   },
 };

@@ -290,7 +290,7 @@ export default {
   name: "App-Parent-Component",
   components: { HeaderComponent, AuthModal },
 
-  created() {
+  beforeCreate() {
     this.$store.dispatch("init_login");
   },
 };

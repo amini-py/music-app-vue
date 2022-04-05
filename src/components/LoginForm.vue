@@ -33,7 +33,7 @@
     <button
       type="submit"
       :disabled="login_in_submission"
-      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:bg-purple-300"
     >
       Submit
     </button>
@@ -64,19 +64,18 @@ export default {
 
       try {
         await this.$store.dispatch("login", values);
-
         this.login_show_alert = true;
         this.login_alert_variant = "bg-green-500";
         this.login_alert_msg = "Success! You are now logged in.";
       } catch (err) {
-        this.login_in_submission = false;
+        this.login_show_alert = true;
         this.login_alert_variant = "bg-red-500";
         this.login_alert_msg = "Invalid login details.";
 
         return;
       }
 
-      console.log(values);
+      window.location.reload();
     },
   },
 };
