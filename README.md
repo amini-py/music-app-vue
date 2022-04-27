@@ -5,7 +5,7 @@
 - Scss
 - Tailwind
 - Firebase
-- Vue + Vuex + 🚧 Router + Vee-validate
+- Vue + Vuex + Router + Vee-validate
 - 🚧 Cypress
 - 🚧 Jest
 #### Dependencies used:
