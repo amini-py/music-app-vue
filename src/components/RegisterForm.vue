@@ -132,8 +132,8 @@ export default {
       initial_values,
       reg_in_submission: false,
       reg_show_alert: false,
-      reg_alert_msg: null,
-      reg_alert_variant: null,
+      reg_alert_msg: "bg-blue-500",
+      reg_alert_variant: "Please wait! Account is being created!",
     };
   },
 
@@ -141,17 +141,18 @@ export default {
     async register(values) {
       console.log(values);
       this.reg_in_submission = true;
+      this.reg_show_alert = true;
       this.reg_alert_variant = "bg-blue-500";
       this.reg_alert_msg = "Please wait! Your account is being created.";
 
       try {
         await this.$store.dispatch("register", values);
 
-        this.reg_show_alert = true;
+        this.reg_in_submission = true;
         this.reg_alert_variant = "bg-green-500";
         this.reg_alert_msg = "Success! Your account has been created.";
       } catch (err) {
-        this.reg_in_submission = false;
+        this.reg_in_submission = true;
         this.reg_alert_variant = "bg-red-500";
         this.reg_alert_msg = "An unexpected error occurred. Please try again later!";
 

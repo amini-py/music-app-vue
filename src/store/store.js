@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-import { auth, userCollection } from '@/includes/firebase';
+// eslint-disable-next-line no-unused-vars
+import { auth, userCollection, storage } from '@/includes/firebase';
 
 export default createStore({
   state: {
@@ -32,7 +33,6 @@ export default createStore({
       });
 
       commit('toggleAuth');
-
     },
     async login({ commit }, values) {
       await auth.signInWithEmailAndPassword(
@@ -54,14 +54,5 @@ export default createStore({
 
       commit('toggleAuth');
     },
-    check() {
-      const userLoggedIn = auth.currentUser;
-
-      if (userLoggedIn) {
-        console.log("User is logged in.")
-      } else {
-        console.log("User is not logged in.")
-      }
-    }
   },
 });
