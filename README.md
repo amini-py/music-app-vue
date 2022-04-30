@@ -1,6 +1,11 @@
 # 🚧 music-app-vue
 #### Project show case
 
+> Create an account and login (Firebase based)
+> Navigate to #manage page and upload songs
+> Listen to songs that others have uploaded
+
+
 #### Technologies used:
 - Scss
 - Tailwind
