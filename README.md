@@ -1,9 +1,7 @@
 # 🚧 music-app-vue
 #### Project show case
 
-Create an account and login
-Navigate to #manage page and upload songs
-Listen to songs that others have uploaded and download them
+Create an account and login. Navigate to #manage page and upload songs. Listen to songs that others have uploaded and download them
 
 
 #### Technologies used:
