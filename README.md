@@ -1,9 +1,9 @@
 # 🚧 music-app-vue
 #### Project show case
 
-> Create an account and login (Firebase based)
-> Navigate to #manage page and upload songs
-> Listen to songs that others have uploaded
+Create an account and login
+Navigate to #manage page and upload songs
+Listen to songs that others have uploaded and download them
 
 
 #### Technologies used:
@@ -12,7 +12,7 @@
 - Firebase
 - Vue + Vuex + Router + Vee-validate
 - 🚧 Cypress
-- 🚧 Jest
+- 🚧 Jest (Unit testing + e2e)
 #### Dependencies used:
 - Vue-cli
 - Babel
