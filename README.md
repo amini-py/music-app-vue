@@ -17,7 +17,7 @@ Create an account and login. Navigate to #manage page and upload songs. Listen t
 - Webpack
 - Npm + Yarn <br><br>
 ##### 1. Download or clone the repository using `git clone https://github.com/amini-py/music-app-vue`.
-##### 2. Install the packages using `npm i` command.
+##### 2. Install the packages using `npm i` or `yarn install` command.
 ##### 3. Run the project using `npm run serve` or `yarn serve` command.<br><br><br>
 
 > ## Contact:
