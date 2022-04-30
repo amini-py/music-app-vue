@@ -21,7 +21,7 @@ Create an account and login. Navigate to #manage page and upload songs. Listen t
 ##### 3. Run the project using `npm run serve` or `yarn serve` command.<br><br><br>
 
 > ## Contact:
-> tel: [+98 993 440 0266](tel:+989934400266) <br>
+> tel: [+98 902 185 3114](tel:+989021853114) <br>
 > Email: [amini01.dev@gmail.com](mailto:amini01.dev@gmail.com)
 
 ### Customize configuration
